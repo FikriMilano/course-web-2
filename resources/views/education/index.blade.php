@@ -27,15 +27,26 @@
             <small>{{$education->graduationYear}}</small> <br>
             <small>{{$education->description}}</small> <br><br>
             <a class="btn btn-primary" href="/education/{{$education->id}}/edit">Edit</a>
-
-            <form action="{{route('education.destroy', $education->id)}}" method="POST">
-                @method('DELETE')
-                {{csrf_field()}}
-
-                <input type="hidden" name="id" value="{{$education->id}}"><br>
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                Delete
+            </button>
             <br><br>
+
+            @section('modal-title')
+                Penghapusan Data
+            @endsection
+            @section('modal-message')
+                Yakin hapus education {{$education->school}}?
+            @endsection
+            @section('modal-action')
+                <form action="{{route('education.destroy', $education->id)}}" method="POST">
+                    @method('DELETE')
+                    {{csrf_field()}}
+
+                    <input type="hidden" name="id" value="{{$education->id}}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            @endsection
         @endforeach
     @endif
 @endsection
