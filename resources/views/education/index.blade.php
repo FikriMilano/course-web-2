@@ -48,5 +48,11 @@
                 </form>
             @endsection
         @endforeach
+        Halaman : {{ $educations->currentPage() }} <br />
+        Jumlah Data : {{ $educations->total() }} <br />
+        Data Per Halaman : {{ $educations->perPage() }} <br />
+        <div class="d-flex">
+            {{ $educations->links() }}
+        </div>
     @endif
 @endsection

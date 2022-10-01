@@ -64,9 +64,9 @@ Route::get('/app', function () {
 //    return view('/home/index');
 //});
 //
-//Route::get('/about', function () {
-//    return view('/about/index');
-//});
+Route::get('/starter', function () {
+    return view('/layouts/starter');
+});
 
 Route::resource('posts', 'App\Http\Controllers\PostController');
 Route::resource('projects', 'App\Http\Controllers\ProjectController');

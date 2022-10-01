@@ -16,7 +16,7 @@ class EducationController extends Controller
     {
         $data = array(
             'id' => 'educations',
-            'educations' => Education::all()
+            'educations' => Education::orderBy('created_at', 'desc')->paginate(10)
         );
         return view('education.index')
             ->with($data)
