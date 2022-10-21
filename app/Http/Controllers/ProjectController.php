@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -103,11 +108,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Validator::isCharSurpassingLimit($request->title)) {
+        if (Validator::isCharSurpassingLimit($request->title, 100)) {
             return back()
                 ->with('alertType', 'danger')
-                ->with('alertMsg', 'Title maksimal 1 kata');
+                ->with('alertMsg', 'Title maksimal 100 huruf');
         }
+
+
 
         Project::where('id', $id)->update([
             'title' => $request->title,

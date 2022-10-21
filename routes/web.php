@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,3 +76,8 @@ Route::resource('education', 'App\Http\Controllers\EducationController');
 Route::resource('about', 'App\Http\Controllers\AboutController');
 Route::resource('home', 'App\Http\Controllers\HomeMainController');
 
+Auth::routes([
+    'reset' => false
+]);
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
