@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class EducationController extends Controller
 {
@@ -46,13 +48,39 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        if (Validator::isCharSurpassingLimit($request->school)) {
-            return back()
-                ->with('alertType', 'danger')
-                ->with('alertMsg', 'School name maksimal 1 kata');
+        $this->validate($request, [
+            'school' => 'required|max:255',
+            'graduationYear' => 'required|max:4',
+            'description' => 'required',
+            'picture' => 'image|nullable|max:6000'
+        ]);
+
+        if ($request->hasFile('picture')) {
+            $filenameWithExt = $request->file('picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $filenameSimpan = $filename . '_' . time() . '.' . $extension;
+            $path = $request->file('picture')->storeAs('public/education_image', $filenameSimpan);
+//
+//
+////            File::delete(public_path() . '/public/education_image/' . $filenameSimpan);
+//
+////            $filePath = public_path('/thumbnails');
+//            $image = $request->file('picture');
+//            $img = Image::make($image->path());
+//            $img->resize(400, 400, function ($const) {
+//                $const->aspectRatio();
+////            })->save('public/education_image/' . $filenameSimpan);
+//            })->save(storage_path('education_image/' . $filenameSimpan ));
+//
+////            $filePath = public_path('/education_image');
+////            $image->move($filePath, $filenameSimpan);
+        } else {
+            $filenameSimpan = 'noimage.png';
         }
 
         $education = new Education();
+        $education->picture = $filenameSimpan;
         $education->school = $request->school;
         $education->graduationYear = $request->graduationYear;
         $education->description = $request->description;
@@ -105,16 +133,42 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Validator::isCharSurpassingLimit($request->school)) {
-            return back()
-                ->with('alertType', 'danger')
-                ->with('alertMsg', 'School name maksimal 1 kata');
-        }
+        $this->validate($request, [
+            'school' => 'required|max:255',
+            'graduationYear' => 'required|max:4',
+            'description' => 'required',
+            'picture' => 'image|nullable|max:6000'
+        ]);
+
+//        if ($request->hasFile('picture')) {
+            $filenameWithExt = $request->file('picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $filenameSimpan = $filename . '_' . time() . '.' . $extension;
+            $path = $request->file('picture')->storeAs('public/education_image', $filenameSimpan);
+//
+//
+////            File::delete(public_path() . '/public/education_image/' . $filenameSimpan);
+//
+////            $filePath = public_path('/thumbnails');
+//            $image = $request->file('picture');
+//            $img = Image::make($image->path());
+//            $img->resize(400, 400, function ($const) {
+//                $const->aspectRatio();
+////            })->save('public/education_image/' . $filenameSimpan);
+//            })->save(storage_path('education_image/' . $filenameSimpan ));
+//
+////            $filePath = public_path('/education_image');
+////            $image->move($filePath, $filenameSimpan);
+//        } else {
+//            $filenameSimpan = 'noimage.png';
+//        }
 
         Education::where('id', $id)->update([
             'school' => $request->school,
             'graduationYear' => $request->graduationYear,
-            'description' => $request->description
+            'description' => $request->description,
+            'picture' => $filenameSimpan
         ]);
 
         return redirect('education')
@@ -131,6 +185,7 @@ class EducationController extends Controller
     public function destroy($id)
     {
         $education = Education::find($id);
+        File::delete(public_path() . '/public/education_image/' . $education->picture);
         $education->delete();
         return redirect('education');
     }

@@ -23,6 +23,7 @@
             <a href="/projects/{{$education->id}}">{{$education->school}}</a>
         </h3>
         <small>{{$education->graduationYear}}</small> <br>
-        <small>{{$education->description}}</small>
+        <small>{{$education->description}}</small> <br>
+        <img width="400"  src="{{asset('storage/education_image/' . $education->picture)}}">
     </div>
 @endsection
