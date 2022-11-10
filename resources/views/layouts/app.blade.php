@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('lightbox2/dist/css/lightbox.min.css') }}">
 </head>
 <body class="sidebar-mini layout-fixed sidebar-open" style="height: auto;">
 
@@ -80,6 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('lightbox2/dist/js/lightbox-plus-jquery.min.js') }}"></script>
 
 
 </body>

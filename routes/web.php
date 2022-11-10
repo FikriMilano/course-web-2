@@ -78,6 +78,7 @@ Route::resource('projects', 'App\Http\Controllers\ProjectController');
 Route::resource('education', 'App\Http\Controllers\EducationController');
 Route::resource('about', 'App\Http\Controllers\AboutController');
 Route::resource('home', 'App\Http\Controllers\HomeMainController');
+Route::resource('gallery', 'App\Http\Controllers\GalleryController');
 
 Auth::routes([
     'reset' => false
