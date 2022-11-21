@@ -103,3 +103,5 @@ Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-em
 Auth::routes();
 
 Route::get('/api/greet', 'App\Http\Controllers\GreetController@greet');
+Route::get('/api/gallery', 'App\Http\Controllers\ApiEducationController@gallery');
+Route::get('/api/gallery2', 'App\Http\Controllers\ApiGalleryController@gallery2');

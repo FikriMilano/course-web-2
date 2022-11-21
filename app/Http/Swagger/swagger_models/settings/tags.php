@@ -7,4 +7,11 @@
  * )
  **/
 
+/**
+ * @OA\Tag(
+ *     name="gallery",
+ *     description="show gallery",
+ * )
+ **/
+
 ?>
