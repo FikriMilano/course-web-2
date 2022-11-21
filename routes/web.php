@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\GreetController;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -27,11 +28,11 @@ Route::get('/halo', function () {
 });
 
 Route::get('/halo-parameter/{name}', function ($name) {
-    return '<h1>Helo werld '. $name .'</h1>';
+    return '<h1>Helo werld ' . $name . '</h1>';
 });
 
 Route::get('/halo-parameter-nullable/{name?}', function ($name = 'No name') {
-    return '<h1>Helo werld '. $name .'</h1>';
+    return '<h1>Helo werld ' . $name . '</h1>';
 });
 
 Route::get('/halo-parameter-v', function () {
@@ -43,7 +44,7 @@ Route::get('/halo-parameter-v-data', function () {
 });
 
 Route::get('/halo-parameter-v-data-if', function () {
-   return view('halo-parameter-v-data-if', ['data' => 'uwow']);
+    return view('halo-parameter-v-data-if', ['data' => 'uwow']);
 //   return view('halo-parameter-v-data-if', ['data' => '']);
 });
 
@@ -62,7 +63,6 @@ Route::get('/app', function () {
 //Route::get('/post/{id}/edit', 'PostController@edit');
 //Route::put('/post/{id}', 'PostController@update');
 //Route::delete('/post/{id}', 'PostController@destroy');
-
 
 
 //Route::get('/home', function () {
@@ -101,3 +101,5 @@ Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-em
 Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 Auth::routes();
+
+Route::get('/api/greet', 'App\Http\Controllers\GreetController@greet');
