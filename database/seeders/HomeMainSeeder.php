@@ -24,6 +24,6 @@ class HomeMainSeeder extends Seeder
                 'description' => "Selamat datang di portofolio saya",
             ];
         }
-        DB::table('projects')->insert($data);
+        DB::table('home_mains')->insert($data);
     }
 }
