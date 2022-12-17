@@ -140,12 +140,12 @@ class EducationController extends Controller
             'picture' => 'image|nullable|max:6000'
         ]);
 
-//        if ($request->hasFile('picture')) {
+        if ($request->hasFile('picture')) {
             $filenameWithExt = $request->file('picture')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('picture')->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
-            $path = $request->file('picture')->storeAs('public/education_image', $filenameSimpan);
+//            $path = $request->file('picture')->storeAs('public/education_image', $filenameSimpan);
 //
 //
 ////            File::delete(public_path() . '/public/education_image/' . $filenameSimpan);
@@ -160,9 +160,9 @@ class EducationController extends Controller
 //
 ////            $filePath = public_path('/education_image');
 ////            $image->move($filePath, $filenameSimpan);
-//        } else {
-//            $filenameSimpan = 'noimage.png';
-//        }
+        } else {
+            $filenameSimpan = 'noimage.png';
+        }
 
         Education::where('id', $id)->update([
             'school' => $request->school,
