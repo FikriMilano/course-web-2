@@ -185,7 +185,7 @@ class EducationController extends Controller
     public function destroy($id)
     {
         $education = Education::find($id);
-        File::delete(public_path() . '/public/education_image/' . $education->picture);
+        File::delete(public_path() . '/storage/' . $education->picture);
         $education->delete();
         return redirect('education');
     }

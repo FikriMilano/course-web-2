@@ -24,6 +24,6 @@
         </h3>
         <small>{{$education->graduationYear}}</small> <br>
         <small>{{$education->description}}</small> <br>
-        <img width="400"  src="{{asset('storage/education_image/' . $education->picture)}}">
+        <img width="400"  src="{{asset('storage/' . $education->picture)}}">
     </div>
 @endsection
