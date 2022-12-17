@@ -56,5 +56,11 @@
 {{--                </form>--}}
 {{--            @endsection--}}
         @endforeach
+        Halaman : {{ $projects->currentPage() }} <br/>
+        Jumlah Data : {{ $projects->total() }} <br/>
+        Data Per Halaman : {{ $projects->perPage() }} <br/>
+        <div class="d-flex">
+            {{ $projects->links() }}
+        </div>
     @endif
 @endsection
